@@ -1,7 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
-import { title } from "process";
 
 //インスタンスを作成
 const prisma = new PrismaClient();
