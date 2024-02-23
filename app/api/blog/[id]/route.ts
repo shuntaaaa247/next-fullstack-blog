@@ -16,6 +16,28 @@ export const connect = async () => {
   }
 }
 
+//取得
+export const GET = async (req: NextRequest, { params }: { params: Params }) => {
+  try {
+    const targetId: number = Number(params.id);
+
+    await connect();
+    const post = await prisma.post.findFirst({
+      where: { id: targetId }
+    });
+
+    if(!post) {
+      return NextResponse.json({ message: "idに一致する投稿がありません" }, { status: 404 });
+    }
+
+    return NextResponse.json({ post }, { status: 200 });
+  } catch(err) {
+    console.log(err);
+    return NextResponse.json({ message: "取得失敗" }, { status: 500 });
+  }
+}
+
+//削除
 export const DELETE = async (req: NextRequest, { params }: { params: Params }) => {
   try {
     const targetId: number =  Number(params.id); //urlが[id]なのでparams.id
@@ -39,6 +61,7 @@ export const DELETE = async (req: NextRequest, { params }: { params: Params }) =
   }
 }
 
+//編集
 export const PUT = async (req: NextRequest, { params }: { params: Params }) => {
   const { title, description } = await req.json(); //req.body -> req.json()
 
