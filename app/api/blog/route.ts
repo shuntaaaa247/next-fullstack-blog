@@ -50,7 +50,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       }
     })
 
-    return NextResponse.json({ message: "投稿完了" }, { status: 200 });
+    return NextResponse.json({ message: "投稿完了", post: post }, { status: 200 });
   } catch(err) {
     console.log(err);
     return NextResponse.json({ message: "投稿失敗" }, { status: 500 });
