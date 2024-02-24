@@ -1,8 +1,8 @@
-import { Post } from "@/app/page";
 import { useState } from "react";
+import { PostType } from "@/app/types";
 
 interface Props {
-  post: Post
+  post: PostType
 }
 
 export default function Edit({ post }: Props) {

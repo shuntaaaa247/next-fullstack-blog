@@ -1,21 +1,21 @@
 'use client'
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react';
-import { Post } from '@/app/page';
+import { PostType } from '@/app/types';
 import Edit from '@/components/edit/Edit';
 import { useRouter } from "next/navigation";
 
 export default function PostDetail() {
   const params = useParams<{ id: string }>();
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
-  const [post, setPost] = useState<Post>();
+  const [post, setPost] = useState<PostType>();
   const [willEdit, setWillEdit] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
     const getPost = async () => {
       try {
-        const res = await fetch(baseUrl + "/api/blog/" + params.id);
+        const res = await fetch(baseUrl + "/api/blog/" + params.id, { cache: 'no-store' });
         const json = await res.json();
         setPost(json.post);
       } catch(err) {
