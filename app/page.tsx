@@ -1,8 +1,9 @@
 'use client'
-import { revalidatePath } from "next/cache";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
-interface Post {
+
+export interface Post {
   id: number,
   title: string,
   description: string,
@@ -17,7 +18,6 @@ export default function Home() {
     const getBlogList = async () => {
       const res = await fetch(baseUrl + "/api/blog"); //res自体には無駄なデータがたくさん入っている
       const json = await res.json(); //jsonにはapiから受け取ったpostsの配列がjsonの中で書かれている(posts: Array(3))みたいな感じで
-      console.log("あああ", json.posts)
       setPosts(json.posts); //json.postsで投稿の配列が取り出せる
     }
     getBlogList()
@@ -71,10 +71,12 @@ export default function Home() {
         {posts.map((post: Post) => {
           return(
             <div key={post.id}>
-              <hr />
-              <h2>{post.title}</h2>
-              <p>{post.description}</p>
-              <p>{post.date.toString()}</p>
+              <Link href={"/post/" + post.id}>
+                <hr />
+                <h2>{post.title}</h2>
+                <p>{post.description}</p>
+                <p>{post.date.toString()}</p>
+              </Link>
             </div>
           )
         })}
