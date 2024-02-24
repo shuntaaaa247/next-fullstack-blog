@@ -6,7 +6,7 @@ import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 const prisma = new PrismaClient();
 
 //データベースに接続
-export const connect = async () => {
+const connect = async () => {
   try {
     //prismaでデータベースに接続
     prisma.$connect;

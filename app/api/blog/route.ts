@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 const prisma = new PrismaClient();
 
 //データベースに接続
-export const connect = async () => {
+const connect = async () => { //connect()はexportできない。build時にエラーになる
   try {
     //prismaでデータベースに接続
     prisma.$connect;
